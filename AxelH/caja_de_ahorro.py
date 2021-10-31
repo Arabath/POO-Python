@@ -42,34 +42,32 @@ class CajaDeAhorro(object):
 
     def extraerUnMonto(self, un_monto: int ) -> None:
         """ Extrae un monto a un saldo existente """
-        if un_monto <= self.saldo:
+        if self.puedeExtraer(un_monto):
             self.saldo -= un_monto
         else:
-            print('Saldo fuera de rango')
+            raise ValueError("Imposible realizar extraccion.")
     
     def puedeExtraer(self, un_monto: int) -> bool:
         """ Responde True si puede realizar la extracción """
         return un_monto <= self.saldo  #mensaje de comparación
         
     
-
 if __name__ == "__main__":
     caja = CajaDeAhorro()
     print(caja.saldo)
-
 
     caja.depositarMonto(100)
     # print(caja.saldo)
 
     # caja.depositarMonto(100)
     # print(caja.saldo)
+    try:
+        caja.extraerUnMonto(200)
+    except ValueError as error:
+        print(error)
+        
+    # respuesta = caja.puedeExtraer(100)
+    # print(respuesta)
 
-    # caja.extraerUnMonto(200)
-    # print(caja.saldo)
-
-    respuesta = caja.puedeExtraer(100)
-    print(respuesta)
-
-    
-
+    print(caja.saldo)
        
