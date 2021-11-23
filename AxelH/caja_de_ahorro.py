@@ -53,21 +53,49 @@ class CajaDeAhorro(object):
         
     
 if __name__ == "__main__":
-    caja = CajaDeAhorro()
-    print(caja.saldo)
+    cuenta = CajaDeAhorro()
+    
+    cuenta.depositarMonto(1000)
+    cuenta.extraerUnMonto(50)
+    print(cuenta.saldo)
 
-    caja.depositarMonto(100)
+
+
+
+
+
+
+
+
+
+    # caja.depositarMonto(5000)
+    # print(caja.saldo)
+    # caja.extraerUnMonto(2500)
+    # print(caja.saldo)
+    # caja.puedeExtraer(2500)
+    # print(caja.saldo)
+    # caja.titular('Mario')
+    # print(caja.titular)
+
+
+
+    # caja = CajaDeAhorro()
     # print(caja.saldo)
 
     # caja.depositarMonto(100)
-    # print(caja.saldo)
-    try:
-        caja.extraerUnMonto(200)
-    except ValueError as error:
-        print(error)
-        
-    # respuesta = caja.puedeExtraer(100)
-    # print(respuesta)
+    # # print(caja.saldo)
 
-    print(caja.saldo)
+    # # caja.depositarMonto(100)
+    # # print(caja.saldo)
+    # try:
+    #     caja.extraerUnMonto(200)
+    # except ValueError as error:
+    #     print(error)
+        
+    # # respuesta = caja.puedeExtraer(100)
+    # # print(respuesta)
+
+    # print(caja.saldo)
+
+
        
