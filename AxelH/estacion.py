@@ -1,4 +1,5 @@
 from surtidor import Surtidor
+from functools import reduce
 
 class Estacion():
     """ 
@@ -29,21 +30,25 @@ class Estacion():
         """ Cuenta la cantidad de surtidores añadidos """ 
         return len(self.surtidores)   
 
-    def cantidadSurtidoresVacios(self) -> int:
-        """ Retorna la cantidad de surtidores vacios de la estación """
-        pass
-
     def surtidoresVacios(self) -> list[Surtidor] :
         """ Retorna la lista de surtidores vacios """
-        pass
+        return list(filter(Surtidor.estaVacio, self.surtidores))
+
+    def cantidadSurtidoresVacios(self) -> int:
+        """ Retorna la cantidad de surtidores vacios de la estación """
+        return len(self.surtidoresVacios())
 
     def litrosFaltantes(self) -> int:
         """ Devuelve los litros faltantes """
-        pass
+        result = lambda cont, surtidor: cont + surtidor.cargaFaltante()
+        return reduce(result, self.surtidores, 0)
 
     def costoDeCarga(self, precio_por_litros: int) -> int:
         """ Devuelve el costo de carga para completar la estacion """
-        pass
+        if self.litrosFaltantes() > 0:
+           return precio_por_litros * self.litrosFaltantes()
+        else:
+            print("Error")    
 
 if __name__ == "__main__":
     estacion = Estacion()
