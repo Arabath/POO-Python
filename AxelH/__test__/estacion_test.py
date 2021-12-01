@@ -22,19 +22,57 @@ class TestEstacionDeServicio(unittest.TestCase):
         self.assertListEqual(self.estacion.surtidores, [self.surtidorUno])
 
     def test_cantidadDeSurtidoresDeUnaEstacionVacia(self): 
-        """ pass """
+        """ Cuantos surtidores posee la estacion. """
         self.assertEqual(self.estacion.cantidadDeSurtidores(), 0)
 
+        for _ in range(3): self.estacion.agregarSurtidor(self.surtidorUno)
 
+        self.assertEqual(self.estacion.cantidadDeSurtidores(),3)
 
-    """ Estacion con surtidores
-        0
+    def test_cualesSurtidoresVacios(self):
+        """ Cuales surtiodres vacios posee la estación """
+        self.estacion.agregarSurtidor(self.surtidorUno)
 
-        agrega
+        self.assertEqual(self.surtidorUno.carga,  0)
+        self.assertEqual(self.estacion.cantidadDeSurtidores(), 1)
+        self.assertListEqual(self.estacion.surtidoresVacios(), [self.surtidorUno])
 
-        x
-     """
+        self.surtidorUno.cargar(50)
+
+        self.assertEqual(self.surtidorUno.carga, 50)
+        self.assertListEqual(self.estacion.surtidoresVacios(), [])       
+
+    def test_saberCuantosSurtidoresVacios(self): 
+        """ Cuantos surtidores vacios posee la estación """
+        surtidorDos = Surtidor(100)
+        self.estacion.agregarSurtidor(self.surtidorUno) 
+        self.estacion.agregarSurtidor(surtidorDos)
+
+        self.assertEqual(self.estacion.cantidadDeSurtidores(), 2)
+
+        surtidorDos.cargar(100)
+
+        self.assertEqual(self.estacion.cantidadSurtidoresVacios(), 1)
+    
+    def test_cantidadDeLitrosFaltantes(self): 
+        """ Cuantos litros faltan para completar la carga total del surtidor """
+        surtidorDos = Surtidor(100)
         
+        self.estacion.agregarSurtidor(surtidorDos)
+        surtidorDos.cargar(50)
+
+        self.assertEqual(self.estacion.litrosFaltantes(), 50)
+    
+    def test_costoDeCargaLitrosFaltantes(self): 
+        """ pass """
+        self.surtidorUno.cargar(100)
+        self.estacion.agregarSurtidor(self.surtidorUno)
+
+        
+
+
+
+
 
 if  __name__ == '__main__':
     unittest.main()
